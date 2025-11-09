@@ -6,8 +6,14 @@ import HowItWorks from "./HowItWorks";
 import BlogPost from "./BlogPost";
 import SuccessStories from "./SuccessStories";
 import TopFarmers from "./TopFarmers ";
+import { useLoaderData } from "react-router";
 
 const Home = () => {
+
+  const NewProducts = useLoaderData();
+  const firstSix = NewProducts.slice(0, 6);
+  console.log(firstSix);
+
   return (
     <div className="w-full mx-auto">
 
@@ -21,12 +27,9 @@ const Home = () => {
         <center><h1 className="font-bold text-4xl bg-green-400 w-full py-3 rounded-md">Latest Crops</h1></center>
 
         <div className="m-5 grid grid-cols-1 gap-4 md:grid-cols-3">
-          <LatestCrops></LatestCrops>
-          <LatestCrops></LatestCrops>
-          <LatestCrops></LatestCrops>
-          <LatestCrops></LatestCrops>
-          <LatestCrops></LatestCrops>
-          <LatestCrops></LatestCrops>
+          {
+            firstSix.map(data=> <LatestCrops key={data._id} data={data}></LatestCrops>)
+          }
         </div>
       </div>
 

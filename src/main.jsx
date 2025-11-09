@@ -20,7 +20,9 @@ const router = createBrowserRouter([
     Component: Root,
     errorElement: <ErrorPage></ErrorPage> ,
     children: [
-      { index: true, Component: Home },
+      { index: true,
+        loader: ()=> fetch("http://localhost:5000/allproducts"),
+      Component: Home },
       { path: '/allcrops', Component: AllCrops },
       { path: '/register', Component: Register },
       { path:'/login' , Component: Login },
