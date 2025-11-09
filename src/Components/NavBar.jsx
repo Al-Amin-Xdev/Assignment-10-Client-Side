@@ -3,17 +3,33 @@ import { NavLink } from "react-router";
 import AuthContext from "../AuthProvider/AuthContext";
 
 const NavBar = () => {
+  const { user } = useContext(AuthContext);
 
-  const {name, user } = useContext(AuthContext);
-  console.log(name);
+  const links = (
+    <>
+      <li>
+        <NavLink to="/">
+          <button>Home</button>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/register">
+          <button>Register</button>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/login">
+          <button>Log-In</button>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/product">
+          <button>Post a Product</button>
+        </NavLink>
+      </li>
+    </>
+  );
 
-  const links = <>
-
-    <li><NavLink to="/"><button>Home</button></NavLink></li>
-    <li><NavLink to="/register"><button>Register</button></NavLink></li>
-    <li><NavLink to="/login"><button>Log-In</button></NavLink></li>
-    <li><NavLink to="/product"><button>Post a Product</button></NavLink></li>
-  </>
   return (
     <div>
       <div className="navbar bg-base-100 shadow-sm">
@@ -40,33 +56,22 @@ const NavBar = () => {
               tabIndex="-1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-             {links}
+              {links}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl font-bold border-3 border-green-700 p-3">🌾 Krishi-Link</a>
+          <a className="btn btn-ghost text-xl">🌾 Krishi-Link</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {
-              links
-            }
-          </ul>
+          <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end ">
-
           <div className="w-[50px] h-[50px] rounded-[50%] border-5 border-green-600 hidden md:block">
-            
             <img src="" alt="" />
-
           </div>
 
-          <h1 className="px-1 py-2 bg-amber-50 border-2 border-green-400 rounded-md ml-3">
-            
-            {
-              user? <span >Log Out</span> : <span> Log In</span>
-            }
-            
-            </h1>
+          <h1 className="px-1 py-2 bg-amber-50 border border-green-400 rounded-md ml-3">
+            {user ? <span>Log Out</span> : <span> Log In</span>}
+          </h1>
         </div>
       </div>
     </div>
