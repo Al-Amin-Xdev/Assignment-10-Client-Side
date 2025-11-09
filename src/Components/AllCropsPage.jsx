@@ -1,28 +1,82 @@
 import React from "react";
 
-const AllCropsPage = () => {
+const AllCropsPage = ({datas}) => {
+
+   const {
+    _id,
+    cropName,
+    image,
+    category,
+    description,
+    pricePerUnit,
+    unit,
+    quantityAvailable,
+    // location,
+    postedDate,
+    // ownerId,
+    ownerName,
+    ownerEmail,
+  } = datas;
+
   return (
     <div>
-      <div className="card bg-base-100 w-full max-w-sm mx-auto shadow-sm hover:shadow-md transition-all duration-300">
-        <figure>
+      <div className="max-w-sm w-full mx-auto bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col h-full transition-transform transform hover:scale-105 duration-300">
+        <figure className="w-full h-64 overflow-hidden">
           <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Crop"
-            className="w-full h-60 object-cover"
+            src={image}
+            alt={cropName}
+            className="w-full h-full object-cover rounded-t-2xl"
           />
         </figure>
-        <div className="card-body">
-          <h2 className="card-title">Card Title</h2>
-          <p>
-            A card component has a figure, a body part, and inside body there
-            are title and actions parts.
-          </p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-outline btn-success">
-              View Details
-            </button>
-            <button className="btn btn-primary">Buy Now</button>
+
+        <div className="p-6 flex flex-col justify-between flex-grow">
+          <div className="mb-4">
+            <h2 className="text-2xl font-extrabold text-gray-900">
+              {cropName}
+            </h2>
+            <h3 className="text-gray-500 font-medium mt-1">
+              Owner: {ownerName}
+            </h3>
           </div>
+
+          <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+            {description}
+          </p>
+
+          <div className="grid grid-cols-2 gap-4 text-gray-700 font-medium mb-4">
+            <div className="space-y-1">
+              <p>
+                Quantity:{" "}
+                <span className="font-semibold">{quantityAvailable}</span>
+              </p>
+              <p>
+                Price:{" "}
+                <span className="font-semibold">
+                  {pricePerUnit} / {unit}
+                </span>
+              </p>
+            </div>
+            <div className="space-y-1">
+              <p>
+                Category: <span className="font-semibold">{category}</span>
+              </p>
+              <p>
+                Email: <span className="font-semibold">{ownerEmail}</span>
+              </p>
+              <p>
+                Posted:{" "}
+                <span className="font-semibold">
+                  {new Date(postedDate).toLocaleDateString()}
+                </span>
+              </p>
+            </div>
+          </div>
+
+          
+          <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+              View All Products
+            </button>
+         
         </div>
       </div>
     </div>

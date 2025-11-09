@@ -1,9 +1,11 @@
 import React from "react";
-import LatestCrops from "./LatestCrops";
-import CropDetails from "./CropDetails";
 import AllCropsPage from "./AllCropsPage";
+import { useLoaderData } from "react-router";
 
 const AllCrops = () => {
+
+  const AllCrops = useLoaderData();
+
   return (
     <div className="w-full mx-auto">
       <div>
@@ -28,8 +30,13 @@ const AllCrops = () => {
         </form>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <AllCropsPage></AllCropsPage>
-        {/* <CropDetails></CropDetails> */} 
+
+        {
+           AllCrops.map(datas=> <AllCropsPage key={datas._id} datas={datas}></AllCropsPage>)
+          
+        }
+        {/* <AllCropsPage></AllCropsPage>
+        <CropDetails></CropDetails>  */}
       </div>
     </div>
   );

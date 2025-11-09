@@ -13,6 +13,7 @@ import AuthProvider from './AuthProvider/AuthProvider.jsx';
 import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
 import AllCrops from './Components/AllCrops.jsx';
 import ErrorPage from './Components/ErrorPage.jsx';
+import AllCropsPage from './Components/AllCropsPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,9 @@ const router = createBrowserRouter([
       { index: true,
         loader: ()=> fetch("http://localhost:5000/allproducts"),
       Component: Home },
-      { path: '/allcrops', Component: AllCrops },
+      { path: '/allcrops',
+        loader: ()=> fetch("http://localhost:5000/allproducts"), 
+        Component: AllCrops },
       { path: '/register', Component: Register },
       { path:'/login' , Component: Login },
       { path:'/product' , element: <PrivateRoute><Product></Product></PrivateRoute> }
