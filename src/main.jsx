@@ -11,6 +11,7 @@ import Login from './Components/Login.jsx';
 import Product from './Components/Product.jsx';
 import AuthProvider from './AuthProvider/AuthProvider.jsx';
 import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
+import AllCrops from './Components/AllCrops.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
     Component: Root,
     children: [
       { index: true, Component: Home },
+      { path: '/allcrops', Component: AllCrops },
       { path: '/register', Component: Register },
       { path:'/login' , Component: Login },
       { path:'/product' , element: <PrivateRoute><Product></Product></PrivateRoute> }

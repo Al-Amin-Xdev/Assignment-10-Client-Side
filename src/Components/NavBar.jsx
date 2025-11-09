@@ -13,6 +13,14 @@ const NavBar = () => {
         </NavLink>
       </li>
       <li>
+        <NavLink to="/allcrops">
+          <button>All Crops</button>
+        </NavLink>
+      </li>
+      
+
+
+      <li>
         <NavLink to="/register">
           <button>Register</button>
         </NavLink>
@@ -61,7 +69,7 @@ const NavBar = () => {
           </div>
           <a className="btn btn-ghost text-xl">🌾 Krishi-Link</a>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center hidden lg:flex lg:gap-3">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end ">

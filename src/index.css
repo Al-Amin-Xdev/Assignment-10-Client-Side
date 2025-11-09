@@ -10,9 +10,6 @@ button {
   font-family: inherit;
   cursor: pointer;
 }
-button:hover {
-  border-color: #646cff;
-}
 
 .active {
   background-color: rgb(75, 75, 220);

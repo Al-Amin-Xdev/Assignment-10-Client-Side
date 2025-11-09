@@ -3,6 +3,9 @@ import HeroBar from "./HeroBar";
 import LatestCrops from "./LatestCrops";
 import Slider from "./Slider";
 import HowItWorks from "./HowItWorks";
+import BlogPost from "./BlogPost";
+import SuccessStories from "./SuccessStories";
+import TopFarmers from "./TopFarmers ";
 
 const Home = () => {
   return (
@@ -28,6 +31,9 @@ const Home = () => {
       </div>
 
       <HowItWorks></HowItWorks>
+      <BlogPost></BlogPost>
+      <SuccessStories></SuccessStories>
+      <TopFarmers></TopFarmers>
     </div>
   );
 };

@@ -33,8 +33,8 @@ const HeroBar = () => {
              <h1 className="font-bold text-3xl">Explore The Website To Know About Our Sercives</h1>
             </div>
             <div>
-              <NavLink to="/register"><button className="font-bold bg-violet-600 text-white px-3 py-2  rounded-md m-10">Register</button></NavLink>
-              <NavLink to="/login"><button className="font-bold bg-violet-600 text-white px-3 py-2 rounded-md m-10">Log-In</button></NavLink>
+              <NavLink to="/register"><button className="font-bold bg-violet-600 text-white px-3 py-2  rounded-md m-5">Register</button></NavLink>
+              <NavLink to="/login"><button className="font-bold bg-violet-600 text-white px-3 py-2 rounded-md m-5">Log-In</button></NavLink>
             </div>
           </div>
         </div>
