@@ -53,14 +53,17 @@ const NavBar = () => {
           </ul>
         </div>
         <div className="navbar-end ">
-          <div className="w-[50px] h-[50px] rounded-[50%] border-5 border-green-600">
+
+          <div className="w-[50px] h-[50px] rounded-[50%] border-5 border-green-600 hidden md:block">
             
             <img src="" alt="" />
+
           </div>
+
           <h1 className="px-1 py-2 bg-amber-50 border-2 border-green-400 rounded-md ml-3">
             
             {
-              user? <span>Log Out</span> : <span> Log In</span>
+              user? <span >Log Out</span> : <span> Log In</span>
             }
             
             </h1>
