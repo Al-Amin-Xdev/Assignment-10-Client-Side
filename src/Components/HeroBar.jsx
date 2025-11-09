@@ -16,7 +16,7 @@ const HeroBar = () => {
           {/* Left side text */}
           <div className="text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl font-extrabold text-green-800 mb-4 leading-tight">
-              KrishiLink – Connecting Farmers & Communities
+              KrishiLink – Farmer’s Growth & Connection Platform
             </h1>
             <p className="text-gray-600 text-base md:text-lg mb-6">
               A modern platform empowering{" "}

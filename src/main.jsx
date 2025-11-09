@@ -12,11 +12,13 @@ import Product from './Components/Product.jsx';
 import AuthProvider from './AuthProvider/AuthProvider.jsx';
 import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
 import AllCrops from './Components/AllCrops.jsx';
+import ErrorPage from './Components/ErrorPage.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
+    errorElement: <ErrorPage></ErrorPage> ,
     children: [
       { index: true, Component: Home },
       { path: '/allcrops', Component: AllCrops },
