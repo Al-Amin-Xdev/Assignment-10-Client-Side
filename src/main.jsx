@@ -14,6 +14,7 @@ import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
 import AllCrops from './Components/AllCrops.jsx';
 import ErrorPage from './Components/ErrorPage.jsx';
 import AllCropsPage from './Components/AllCropsPage.jsx';
+import CropDetails from './Components/CropDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -24,12 +25,19 @@ const router = createBrowserRouter([
       { index: true,
         loader: ()=> fetch("http://localhost:5000/allproducts"),
       Component: Home },
+
       { path: '/allcrops',
         loader: ()=> fetch("http://localhost:5000/allproducts"), 
         Component: AllCrops },
+
       { path: '/register', Component: Register },
       { path:'/login' , Component: Login },
-      { path:'/product' , element: <PrivateRoute><Product></Product></PrivateRoute> }
+
+      { path:'/cropdetails/:id',
+        loader: ({params})=> fetch(`http://localhost:5000/allproducts/${params.id}`), 
+        Component: CropDetails},
+
+      { path:'/product' , element: <PrivateRoute><Product></Product></PrivateRoute> },
     ],
   },
 ]);

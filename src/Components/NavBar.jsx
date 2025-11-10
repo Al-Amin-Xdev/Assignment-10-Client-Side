@@ -3,7 +3,17 @@ import { NavLink } from "react-router";
 import AuthContext from "../AuthProvider/AuthContext";
 
 const NavBar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
+
+  const LogOut = () => {
+    logout()
+      .then(() => {
+        alert("Log out successfull");
+      })
+      .catch((error) => {
+        console.log("An error happened. When loging out", error);
+      });
+  };
 
   const links = (
     <>
@@ -17,8 +27,6 @@ const NavBar = () => {
           <button>All Crops</button>
         </NavLink>
       </li>
-      
-
 
       <li>
         <NavLink to="/register">
@@ -77,9 +85,29 @@ const NavBar = () => {
             <img src="" alt="" />
           </div>
 
-          <h1 className="px-1 py-2 bg-amber-50 border border-green-400 rounded-md ml-3">
-            {user ? <span>Log Out</span> : <span> Log In</span>}
+          <h1 className="flex items-center justify-between gap-3 px-4 py-2 ml-3 bg-amber-50 rounded-xl shadow-sm border border-amber-100 text-gray-800">
+            {user ? (
+              <div className="flex items-center gap-3">
+                <span className="font-semibold text-gray-700">
+                  {user.displayName}
+                </span>
+                <button
+                  onClick={LogOut}
+                  className="px-3 py-1 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 transition duration-200"
+                >
+                  Log Out
+                </button>
+              </div>
+            ) : (
+              <NavLink
+                to="/login"
+                className="px-3 py-1 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition duration-200"
+              >
+                Log In
+              </NavLink>
+            )}
           </h1>
+          
         </div>
       </div>
     </div>

@@ -1,154 +1,109 @@
-import React, { useState } from "react";
-import { FaLeaf } from "react-icons/fa";
 
-const CropDetails = ({ crop, user }) => {
-  // Example crop data (remove when you pass props)
-  crop = crop || {
-    name: "Fresh Organic Tomatoes",
-    image: "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp",
-    pricePerUnit: 60,
-    quantityAvailable: 120,
-    location: "Dhaka, Bangladesh",
-    description:
-      "High-quality organic tomatoes grown without chemicals. Freshly harvested and ready for sale.",
-    ownerEmail: "farmer@example.com",
-  };
+import { useContext } from "react";
+import { useLoaderData} from "react-router";
+import AuthContext from "../AuthProvider/AuthContext";
 
-  const [quantity, setQuantity] = useState("");
-  const [message, setMessage] = useState("");
-  const [showModal, setShowModal] = useState(false);
+const CropDetails = () => {
 
-  const totalPrice = quantity ? quantity * crop.pricePerUnit : 0;
-  const isOwner = user?.email === crop.ownerEmail;
+  const data = useLoaderData();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (quantity < 1) {
-      alert("❌ Quantity must be at least 1");
-      return;
-    }
-    setShowModal(true);
-  };
+  const { user } = useContext(AuthContext);
 
-  const confirmSubmit = () => {
-    setShowModal(false);
-    alert("✅ Interest request submitted successfully!");
-  };
+
+  console.log(data);
+  const {
+    _id,
+    cropName,
+    image,
+    category,
+    description,
+    pricePerUnit,
+    unit,
+    quantityAvailable,
+    // location,
+    postedDate,
+    // ownerId,
+    ownerName,
+    ownerEmail,
+  } = data;
 
   return (
-    <div className="max-w-4xl mx-auto my-10 px-4">
-      <div className="card bg-base-100 shadow-lg hover:shadow-2xl transition-shadow duration-300 rounded-2xl overflow-hidden border border-green-100">
-        {/* Crop Image */}
-        <figure className="relative">
+    <div className="mt-10">
+      <div className="max-w-sm w-full mx-auto bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col h-full transition-transform transform hover:scale-105 duration-300">
+        <figure className="w-full h-64 overflow-hidden">
           <img
-            src={crop.image}
-            alt={crop.name}
-            className="w-full h-72 object-cover"
+            src={image}
+            alt={cropName}
+            className="w-full h-full object-cover rounded-t-2xl"
           />
-          <div className="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
-            <FaLeaf /> {crop.location}
-          </div>
         </figure>
 
-        {/* Crop Info */}
-        <div className="card-body">
-          <h2 className="card-title text-2xl font-bold text-green-800">
-            {crop.name}
-          </h2>
-          <p className="text-gray-600 leading-relaxed">{crop.description}</p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 text-gray-700">
-            <p>
-              <span className="font-semibold text-green-700">Price/Unit:</span>{" "}
-              ৳{crop.pricePerUnit}
-            </p>
-            <p>
-              <span className="font-semibold text-green-700">Available:</span>{" "}
-              {crop.quantityAvailable} kg
-            </p>
+        <div className="p-6 flex flex-col justify-between flex-grow">
+          <div className="mb-4">
+            <h2 className="text-2xl font-extrabold text-gray-900">
+              {cropName}
+            </h2>
+            <h3 className="text-gray-500 font-medium mt-1">
+              Owner: {ownerName}
+            </h3>
           </div>
 
-          {/* Interest Form (for non-owner users only) */}
-          {!isOwner && (
-            <form
-              onSubmit={handleSubmit}
-              className="mt-6 p-4 border border-green-200 rounded-xl bg-green-50"
-            >
-              <h3 className="text-xl font-semibold text-green-700 mb-3">
-                Send Interest Request
-              </h3>
+          <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+            {description}
+          </p>
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <input
-                  type="number"
-                  placeholder="Quantity (kg)"
-                  value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
-                  className="input input-bordered flex-1"
-                  required
-                  min="1"
-                />
-                <input
-                  type="text"
-                  placeholder="Your message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  className="input input-bordered flex-1"
-                  required
-                />
-              </div>
-
-              <div className="mt-3 text-green-800 font-semibold">
-                Total Price: ৳{totalPrice}
-              </div>
-
-              <button
-                type="submit"
-                className="btn btn-success w-full mt-4 hover:scale-105 transition-transform"
-              >
-                Submit Interest
-              </button>
-            </form>
-          )}
-
-          {/* If owner */}
-          {isOwner && (
-            <div className="mt-6 p-4 bg-yellow-50 border border-yellow-300 rounded-xl">
-              <h3 className="text-lg font-semibold text-yellow-700">
-                You are the owner of this crop.
-              </h3>
-              <p className="text-gray-700">Manage received interest requests here.</p>
+          <div className="grid grid-cols-2 gap-4 text-gray-700 font-medium mb-4">
+            <div className="space-y-1">
+              <p>
+                Quantity:{" "}
+                <span className="font-semibold">{quantityAvailable}</span>
+              </p>
+              <p>
+                Price:{" "}
+                <span className="font-semibold">
+                  {pricePerUnit} / {unit}
+                </span>
+              </p>
             </div>
-          )}
+            <div className="space-y-1">
+              <p>
+                Category: <span className="font-semibold">{category}</span>
+              </p>
+              <p>
+                Email: <span className="font-semibold">{ownerEmail}</span>
+              </p>
+              <p>
+                Posted:{" "}
+                <span className="font-semibold">
+                  {new Date(postedDate).toLocaleDateString()}
+                </span>
+              </p>
+            </div>
+          </div>
         </div>
+
+        {
+          user?.email !==  ownerEmail?
+          <div className="m-3">
+          <h1 className="font-bold text-xl text-center bg-green-400">Interested to this crop!!! <br></br>Contact The Owner</h1>
+          <form>
+
+            <label className="label font-bold text-black">Name</label><br></br>
+            <input type="text" className="input" name="name" placeholder="Name" /><br></br>
+
+            <label className="label font-bold text-black">Quantity of the Crop</label><br></br>
+            <input type="number" className="input" name="number" placeholder="Quantity" /><br></br>
+
+            <label className="label font-bold text-black">Email</label><br></br>
+            <input type="email" className="input" name="email" placeholder="Email" />
+
+            <button className="bg-green-700 text-white rounded-md w-2/3 mt-3">Submit Your Interest</button>
+
+          </form>
+        </div> : ""
+        }
+
       </div>
-
-      {/* Confirmation Modal */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm w-full">
-            <h2 className="text-lg font-bold mb-4">Confirm Submission</h2>
-            <p className="text-gray-600 mb-6">
-              You are sending a request for <b>{quantity}</b> kg of{" "}
-              <b>{crop.name}</b> for ৳{totalPrice}.
-            </p>
-            <div className="flex justify-center gap-3">
-              <button
-                onClick={confirmSubmit}
-                className="btn btn-success text-white"
-              >
-                Confirm
-              </button>
-              <button
-                onClick={() => setShowModal(false)}
-                className="btn btn-outline"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
