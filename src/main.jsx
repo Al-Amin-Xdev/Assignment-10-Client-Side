@@ -8,13 +8,15 @@ import Root from './Components/Root.jsx';
 import Home from './Components/Home.jsx';
 import Register from './Components/Register.jsx';
 import Login from './Components/Login.jsx';
-import Product from './Components/Product.jsx';
 import AuthProvider from './AuthProvider/AuthProvider.jsx';
 import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
 import AllCrops from './Components/AllCrops.jsx';
 import ErrorPage from './Components/ErrorPage.jsx';
-import AllCropsPage from './Components/AllCropsPage.jsx';
 import CropDetails from './Components/CropDetails.jsx';
+import Profile from './Components/Profile.jsx';
+import AddCrop from './Components/AddCrop.jsx';
+import Myposts from './Components/Myposts.jsx';
+import Myinterests from './Components/Myinterests .jsx';
 
 const router = createBrowserRouter([
   {
@@ -30,14 +32,24 @@ const router = createBrowserRouter([
         loader: ()=> fetch("http://localhost:5000/allproducts"), 
         Component: AllCrops },
 
+      { path: '/addcrop', 
+        element: <PrivateRoute><AddCrop /></PrivateRoute> },
+
+      { path: '/mypost', 
+        element: <PrivateRoute><Myposts /></PrivateRoute> },
+
+      { path: '/myinterest', 
+        element: <PrivateRoute><Myinterests /></PrivateRoute> },
+
+
       { path: '/register', Component: Register },
       { path:'/login' , Component: Login },
 
+      { path:'/profile' , Component: Profile },
+
       { path:'/cropdetails/:id',
         loader: ({params})=> fetch(`http://localhost:5000/allproducts/${params.id}`), 
-        Component: CropDetails},
-
-      { path:'/product' , element: <PrivateRoute><Product></Product></PrivateRoute> },
+        element: <PrivateRoute><CropDetails></CropDetails></PrivateRoute>},
     ],
   },
 ]);

@@ -22,27 +22,46 @@ const NavBar = () => {
           <button>Home</button>
         </NavLink>
       </li>
+
+      
       <li>
         <NavLink to="/allcrops">
           <button>All Crops</button>
         </NavLink>
       </li>
 
+    
+
+       <li>
+        <NavLink to="/addcrop">
+          <button>Add Crop</button>
+        </NavLink>
+      </li>
+
       <li>
+        <NavLink to="/mypost">
+          <button>My Post</button>
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink to="/myinterest">
+          <button>My Interest</button>
+        </NavLink>
+      </li>
+
+       <li>
         <NavLink to="/register">
           <button>Register</button>
         </NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink to="/login">
           <button>Log-In</button>
         </NavLink>
-      </li>
-      <li>
-        <NavLink to="/product">
-          <button>Post a Product</button>
-        </NavLink>
-      </li>
+      </li> */}
+
+
     </>
   );
 
@@ -75,39 +94,51 @@ const NavBar = () => {
               {links}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">🌾 Krishi-Link</a>
+          <a className="btn btn-ghost text-sm md:text-xl">🌾 Krishi-Link</a>
         </div>
         <div className="navbar-center hidden lg:flex lg:gap-3">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
-        <div className="navbar-end ">
-          <div className="w-[50px] h-[50px] rounded-[50%] border-5 border-green-600 hidden md:block">
-            <img src="" alt="" />
-          </div>
 
-          <h1 className="flex items-center justify-between gap-3 px-4 py-2 ml-3 bg-amber-50 rounded-xl shadow-sm border border-amber-100 text-gray-800">
+        <div className="navbar-end flex items-center gap-3">
+          {/* Profile Image */}
+          {user && (
+            <div className="w-[45px] h-[45px] rounded-full overflow-hidden border-2 border-green-600 hidden md:block shadow-sm">
+              <img
+                src={
+                  user.photoURL || "https://i.ibb.co/2d3W7Yt/default-avatar.png"
+                }
+                alt="User Avatar"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
+
+          {/* Name + Buttons */}
+          <div className="flex items-center gap-3 bg-amber-50 border border-amber-100 shadow-sm rounded-xl px-3 py-2 md:px-4 md:py-2 text-gray-800">
             {user ? (
-              <div className="flex items-center gap-3">
-                <span className="font-semibold text-gray-700">
-                  {user.displayName}
+              <>
+                {/* Name only visible on md+ screens */}
+                <span className="font-medium text-gray-700 hidden sm:block">
+                  {user.displayName?.split(" ")[0] || "User"}
                 </span>
+
                 <button
                   onClick={LogOut}
-                  className="px-3 py-1 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 transition duration-200"
+                  className="px-3 py-1 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 active:scale-95 transition-all duration-200"
                 >
                   Log Out
                 </button>
-              </div>
+              </>
             ) : (
               <NavLink
                 to="/login"
-                className="px-3 py-1 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition duration-200"
+                className="px-3 py-1 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 active:scale-95 transition-all duration-200"
               >
                 Log In
               </NavLink>
             )}
-          </h1>
-          
+          </div>
         </div>
       </div>
     </div>
