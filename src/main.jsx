@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       { path: '/register', Component: Register },
       { path:'/login' , Component: Login },
 
-      { path:'/profile' , Component: Profile },
+      { path:'/profile' , element: <PrivateRoute><Profile></Profile></PrivateRoute> },
 
       { path:'/cropdetails/:id',
         loader: ({params})=> fetch(`http://localhost:5000/allproducts/${params.id}`), 

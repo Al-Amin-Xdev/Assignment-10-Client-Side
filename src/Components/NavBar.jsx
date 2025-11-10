@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 import AuthContext from "../AuthProvider/AuthContext";
 
 const NavBar = () => {
@@ -7,141 +7,182 @@ const NavBar = () => {
 
   const LogOut = () => {
     logout()
-      .then(() => {
-        alert("Log out successfull");
-      })
-      .catch((error) => {
-        console.log("An error happened. When loging out", error);
-      });
+      .then(() => alert("Logged out successfully ✔"))
+      .catch((error) => console.log("Logout error:", error));
   };
 
   const links = (
     <>
       <li>
-        <NavLink to="/">
-          <button>Home</button>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            `px-3 py-1 rounded-md hover:bg-amber-100 transition ${
+              isActive ? "bg-amber-200 font-semibold" : ""
+            }`
+          }
+        >
+          Home
         </NavLink>
       </li>
-
-      
       <li>
-        <NavLink to="/allcrops">
-          <button>All Crops</button>
+        <NavLink
+          to="/allcrops"
+          className={({ isActive }) =>
+            `px-3 py-1 rounded-md hover:bg-amber-100 transition ${
+              isActive ? "bg-amber-200 font-semibold" : ""
+            }`
+          }
+        >
+          All Crops
         </NavLink>
       </li>
-
-    
-
-       <li>
-        <NavLink to="/addcrop">
-          <button>Add Crop</button>
-        </NavLink>
-      </li>
-
       <li>
-        <NavLink to="/mypost">
-          <button>My Post</button>
+        <NavLink
+          to="/addcrop"
+          className={({ isActive }) =>
+            `px-3 py-1 rounded-md hover:bg-amber-100 transition ${
+              isActive ? "bg-amber-200 font-semibold" : ""
+            }`
+          }
+        >
+          Add Crop
         </NavLink>
       </li>
-
       <li>
-        <NavLink to="/myinterest">
-          <button>My Interest</button>
+        <NavLink
+          to="/mypost"
+          className={({ isActive }) =>
+            `px-3 py-1 rounded-md hover:bg-amber-100 transition ${
+              isActive ? "bg-amber-200 font-semibold" : ""
+            }`
+          }
+        >
+          My Post
         </NavLink>
       </li>
-
-       <li>
-        <NavLink to="/register">
-          <button>Register</button>
+      <li>
+        <NavLink
+          to="/myinterest"
+          className={({ isActive }) =>
+            `px-3 py-1 rounded-md hover:bg-amber-100 transition ${
+              isActive ? "bg-amber-200 font-semibold" : ""
+            }`
+          }
+        >
+          My Interest
         </NavLink>
       </li>
-      {/* <li>
-        <NavLink to="/login">
-          <button>Log-In</button>
+      <li>
+        <NavLink
+          to="/register"
+          className={({ isActive }) =>
+            `px-3 py-1 rounded-md hover:bg-amber-100 transition ${
+              isActive ? "bg-amber-200 font-semibold" : ""
+            }`
+          }
+        >
+          Register
         </NavLink>
-      </li> */}
-
-
+      </li>
+      {user && (
+        <li>
+          <NavLink
+            to="/profile"
+            className={({ isActive }) =>
+              `px-3 py-1 rounded-md hover:bg-amber-100 transition ${
+                isActive ? "bg-amber-200 font-semibold" : ""
+              }`
+            }
+          >
+            Profile
+          </NavLink>
+        </li>
+      )}
     </>
   );
 
   return (
-    <div>
-      <div className="navbar bg-base-100 shadow-sm">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {" "}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />{" "}
-              </svg>
-            </div>
-            <ul
-              tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-            >
-              {links}
-            </ul>
+    <nav className="bg-white shadow-md sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
+          {/* Logo */}
+          <div className="shrink-0 flex items-center">
+            <NavLink to="/" className="text-xl font-bold text-green-600">
+              🌾 Krishi-Link
+            </NavLink>
           </div>
-          <a className="btn btn-ghost text-sm md:text-xl">🌾 Krishi-Link</a>
-        </div>
-        <div className="navbar-center hidden lg:flex lg:gap-3">
-          <ul className="menu menu-horizontal px-1">{links}</ul>
-        </div>
 
-        <div className="navbar-end flex items-center gap-3">
-          {/* Profile Image */}
-          {user && (
-            <div className="w-[45px] h-[45px] rounded-full overflow-hidden border-2 border-green-600 hidden md:block shadow-sm">
-              <img
-                src={
-                  user.photoURL || "https://i.ibb.co/2d3W7Yt/default-avatar.png"
-                }
-                alt="User Avatar"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
+          {/* Desktop Links */}
+          <div className="hidden lg:flex lg:items-center lg:space-x-4">
+            <ul className="flex space-x-2">{links}</ul>
+          </div>
 
-          {/* Name + Buttons */}
-          <div className="flex items-center gap-3 bg-amber-50 border border-amber-100 shadow-sm rounded-xl px-3 py-2 md:px-4 md:py-2 text-gray-800">
-            {user ? (
-              <>
-                {/* Name only visible on md+ screens */}
-                <span className="font-medium text-gray-700 hidden sm:block">
-                  {user.displayName?.split(" ")[0] || "User"}
-                </span>
-
-                <button
-                  onClick={LogOut}
-                  className="px-3 py-1 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 active:scale-95 transition-all duration-200"
+          {/* Mobile Hamburger */}
+          <div className="lg:hidden flex items-center">
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost p-2 rounded-md">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  Log Out
-                </button>
-              </>
-            ) : (
-              <NavLink
-                to="/login"
-                className="px-3 py-1 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 active:scale-95 transition-all duration-200"
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content mt-2 p-2 shadow bg-white rounded-md w-48 flex flex-col space-y-1"
               >
-                Log In
-              </NavLink>
+                {links}
+              </ul>
+            </div>
+          </div>
+
+          {/* Profile & Logout */}
+          <div className="hidden md:flex items-center gap-3">
+            {user && (
+              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-green-500 shadow-sm">
+                <img
+                  src={user.photoURL || "https://i.ibb.co/2d3W7Yt/default-avatar.png"}
+                  alt="User Avatar"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             )}
+            <div className="flex items-center gap-2 bg-amber-50 border border-amber-100 rounded-xl px-3 py-1 shadow-sm">
+              {user ? (
+                <>
+                  <span className="hidden sm:block font-medium text-gray-700">
+                    {user.displayName?.split(" ")[0] || "No User"}
+                  </span>
+                  <button
+                    onClick={LogOut}
+                    className="px-3 py-1 text-sm font-medium bg-green-500 text-white rounded-md hover:bg-green-600 transition"
+                  >
+                    Log Out
+                  </button>
+                </>
+              ) : (
+                <NavLink
+                  to="/login"
+                  className="px-3 py-1 text-sm font-medium bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
+                >
+                  Log In
+                </NavLink>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
