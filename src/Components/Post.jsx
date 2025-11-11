@@ -1,17 +1,10 @@
+import React from 'react';
 
-import { useContext } from "react";
-import { useLoaderData} from "react-router";
-import AuthContext from "../AuthProvider/AuthContext";
+const Post = ({allpost}) => {
 
-const CropDetails = () => {
+  const data = allpost;
 
-  const data = useLoaderData();
-
-  const { user } = useContext(AuthContext);
-
-
-  console.log(data);
-  const {
+    const {
     _id,
     cropName,
     image,
@@ -27,8 +20,11 @@ const CropDetails = () => {
     ownerEmail,
   } = data;
 
+
+
+
   return (
-    <div className="mt-10">
+    <div>
       <div className="max-w-sm w-full mx-auto bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col h-full transition-transform transform hover:scale-105 duration-300">
         <figure className="w-full h-64 overflow-hidden">
           <img
@@ -38,7 +34,7 @@ const CropDetails = () => {
           />
         </figure>
 
-        <div className="p-6 flex flex-col justify-between grow">
+        <div className="p-6 flex flex-col justify-between flex-grow">
           <div className="mb-4">
             <h2 className="text-2xl font-extrabold text-gray-900">
               {cropName}
@@ -81,31 +77,9 @@ const CropDetails = () => {
             </div>
           </div>
         </div>
-
-        {
-          user?.email !==  ownerEmail?
-          <div className="m-3">
-          <h1 className="font-bold text-xl text-center bg-green-400">Interested to this crop!!! <br></br>Contact The Owner</h1>
-          <form>
-
-            <label className="label font-bold text-black">Name</label><br></br>
-            <input type="text" className="input" name="name" placeholder="Name" /><br></br>
-
-            <label className="label font-bold text-black">Quantity of the Crop</label><br></br>
-            <input type="number" className="input" name="number" placeholder="Quantity" /><br></br>
-
-            <label className="label font-bold text-black">Email</label><br></br>
-            <input type="email" className="input" name="email" placeholder="Email" />
-
-            <button className="bg-green-700 text-white rounded-md w-2/3 mt-3">Submit Your Interest</button>
-
-          </form>
-        </div> : ""
-        }
-
       </div>
     </div>
   );
 };
 
-export default CropDetails;
+export default Post;
