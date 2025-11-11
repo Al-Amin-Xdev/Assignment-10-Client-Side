@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../AuthProvider/AuthContext";
 
 const Profile = () => {
+
+  const {user} = useContext(AuthContext);
+
   return (
     <div>
       <div className="max-w-md mx-auto p-5 mt-10 bg-white shadow-md rounded-lg">
@@ -10,13 +14,13 @@ const Profile = () => {
         <div className="flex flex-col items-center gap-3 mb-5">
           <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-green-500">
             <img
-              src="https://i.ibb.co/2d3W7Yt/default-avatar.png"
+              src={user.photoURL || "https://www.google.com/imgres?q=avatar%20icon&imgurl=https%3A%2F%2Fwww.pngplay.com%2Fwp-content%2Fuploads%2F12%2FUser-Avatar-Profile-Transparent-Clip-Art-PNG.png&imgrefurl=https%3A%2F%2Fwww.pngplay.com%2Fimage%2F325522&docid=1PvXhz18oYCegM&tbnid=NKj8A8LQPGc3HM&vet=12ahUKEwiWsICVruiQAxVjyDgGHUN-LnQ4ChAzegQIXRAA..i&w=792&h=792&hcb=2&ved=2ahUKEwiWsICVruiQAxVjyDgGHUN-LnQ4ChAzegQIXRAA"}
               alt="Profile"
               className="w-full h-full object-cover"
             />
           </div>
-          <h3 className="text-lg font-medium">John Doe</h3>
-          <p className="text-gray-500">johndoe@example.com</p>
+          <h3 className="text-lg font-medium"> {user.displayName?.split(" ")[0] || "No User"}</h3>
+          <p className="text-gray-500"> {user.email?.split(" ")[0] || "No Email"}</p>
         </div>
 
         {/* Update Form */}

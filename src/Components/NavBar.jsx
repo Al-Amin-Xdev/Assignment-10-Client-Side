@@ -151,7 +151,7 @@ const NavBar = () => {
             {user && (
               <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-green-500 shadow-sm">
                 <img
-                  src={user.photoURL || "https://i.ibb.co/2d3W7Yt/default-avatar.png"}
+                  src={user.photoURL || "https://www.google.com/imgres?q=avatar%20icon&imgurl=https%3A%2F%2Fwww.pngplay.com%2Fwp-content%2Fuploads%2F12%2FUser-Avatar-Profile-Transparent-Clip-Art-PNG.png&imgrefurl=https%3A%2F%2Fwww.pngplay.com%2Fimage%2F325522&docid=1PvXhz18oYCegM&tbnid=NKj8A8LQPGc3HM&vet=12ahUKEwiWsICVruiQAxVjyDgGHUN-LnQ4ChAzegQIXRAA..i&w=792&h=792&hcb=2&ved=2ahUKEwiWsICVruiQAxVjyDgGHUN-LnQ4ChAzegQIXRAA"}
                   alt="User Avatar"
                   className="w-full h-full object-cover"
                 />
