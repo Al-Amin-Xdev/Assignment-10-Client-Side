@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import AuthContext from "../AuthProvider/AuthContext";
 import { updateProfile } from "firebase/auth";
+import Swal from "sweetalert2";
 
 const Register = () => {
 
@@ -20,16 +21,37 @@ const Register = () => {
     register(email, password)
     .then((userInfo) => {
       console.log(userInfo);
-      alert("Registration Successfull ✔")
+      Swal.fire({
+        icon: "success",
+        title: "Registration",
+        text: "Your registration is successfull ✅",
+        timer: 2000,
+        showConfirmButton: false,
+      });
 
       updateProfile(userInfo.user, {
         displayName: name,
       })
       .then(()=>{
         setUser({...userInfo, displayName: name})
+         Swal.fire({
+        icon: "success",
+        title: "Registration",
+        text: "Profile has been updated successfully ✅",
+        timer: 2000,
+        showConfirmButton: false,
+      });
       })
       .catch((error)=>{
         console.log(error);
+        setUser({...userInfo, displayName: name})
+         Swal.fire({
+        icon: "info",
+        title: "Registration",
+        text: "Profile has not been updated successfully",
+        timer: 2000,
+        showConfirmButton: false,
+      });
       });
       setLoading(false);
 

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import AuthContext from "../AuthProvider/AuthContext";
 import { useLocation, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
@@ -20,7 +21,15 @@ const Login = () => {
     login(email, password)
     .then((userInfo) => {
       console.log(userInfo);
-      alert("Log in Successfull");
+
+       Swal.fire({
+        icon: "success",
+        title: "Log-In",
+        text: "Your log-in is successfull ✅",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
       navigate(location?.state || '/');
       setUser(userInfo);
       setLoading(false);
@@ -28,6 +37,13 @@ const Login = () => {
     .catch((error) => {
       const errorMessage = error.message;
       console.log(errorMessage);
+       Swal.fire({
+        icon: "info",
+        title: "Log-In",
+        text: "Your Log-in is not successfull ✅",
+        timer: 2000,
+        showConfirmButton: false,
+      });
     });
     
   };
@@ -36,14 +52,28 @@ const Login = () => {
   
     PopUpLogIn()
     .then((userInfo) => {
-      console.log(userInfo);
-      alert("Log in Successfull");
+      
+      Swal.fire({
+        icon: "success",
+        title: "Log-In",
+        text: "Your log-in is successfull ✅",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+      
       navigate(location?.state || '/');
       setUser(userInfo);
       setLoading(false);
     })
     .catch((error) => {
       const errorMessage = error.message;
+       Swal.fire({
+        icon: "Info",
+        title: "Log-In",
+        text: "Your log-in was not successfull",
+        timer: 2000,
+        showConfirmButton: false,
+      });
       console.log(errorMessage);
     });
 

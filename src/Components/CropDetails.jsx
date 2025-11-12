@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useLoaderData } from "react-router";
 import AuthContext from "../AuthProvider/AuthContext";
 import useAxios from "../useAxios";
+import Swal from "sweetalert2";
 
 const CropDetails = () => {
   const data = useLoaderData();
@@ -40,9 +41,16 @@ const CropDetails = () => {
   axios.patch(`/allproducts/${_id}`, data)
   .then(result=>{
     console.log(result);
-    alert("Interest Sent Successfully");
+
+    Swal.fire({
+      icon: "success",
+      title: "Sent",
+      text: "Your interest request has been sent Successfully ✅",
+      timer: 2000,
+      showConfirmButton: false,
+    });
+    form.reset();
   })
-  console.log(data);
 };
 
 

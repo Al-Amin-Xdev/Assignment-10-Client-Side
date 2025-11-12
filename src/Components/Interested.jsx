@@ -23,9 +23,7 @@ const Interested = ({ one }) => {
     interest,
   } = data;
 
-  const userInterest = interest.find(i => i.userEmail === user.email);
-
- 
+  const userInterest = interest.find((i) => i.userEmail === user.email);
 
   return (
     <div className="m-3">
@@ -85,36 +83,50 @@ const Interested = ({ one }) => {
           </h1>
         </div>
 
-        {
-          userInterest.quantity? <h1 className="font-bold text-center bg-blue-500 text-white">Interest Status</h1> : ""
-        }
+        {userInterest.quantity ? (
+          <h1 className="font-bold text-center bg-blue-500 text-white">
+            Interest Status
+          </h1>
+        ) : (
+          ""
+        )}
 
         <div>
           <div className="max-w-sm w-full mx-auto bg-white rounded-2xl shadow-md p-5 mb-6">
-            
             {/* Interest Details */}
             <div className="mt-4 bg-gray-50 rounded-xl p-4 flex flex-col gap-3">
               <div className="flex justify-between items-center">
                 <span className="font-medium text-gray-700">Quantity:</span>
-                <span className="text-gray-900 font-semibold">{userInterest.quantity}</span>
+                <span className="text-gray-900 font-semibold">
+                  {userInterest.quantity}
+                </span>
               </div>
 
               <div className="flex justify-between items-center">
                 <span className="font-medium text-gray-700">Message:</span>
-                <span className="text-gray-900 font-semibold">{userInterest.message}</span>
+                <span className="text-gray-900 font-semibold">
+                  {userInterest.message}
+                </span>
               </div>
 
               <div className="flex justify-between items-center">
                 <span className="font-medium text-gray-700">Status:</span>
-                <span className="px-3 py-1 rounded-full text-white font-semibold text-sm bg-yellow-500">
+
+                <span
+                  className={`px-4 py-2 rounded-full text-white font-semibold text-sm ${
+                    userInterest.status === "pending"
+                      ? "bg-yellow-500"
+                      : userInterest.status === "accepted"
+                      ? "bg-green-500"
+                      : "bg-red-500"
+                  }`}
+                >
                   {userInterest.status}
                 </span>
               </div>
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
   );

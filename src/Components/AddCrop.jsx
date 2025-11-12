@@ -1,6 +1,7 @@
 import React from "react";
 import useAuth from "../useAuth";
 import useAxios from "../useAxios";
+import Swal from "sweetalert2";
 
 const AddCrop = () => {
   const { user } = useAuth();
@@ -29,11 +30,26 @@ const AddCrop = () => {
     try {
       const response = await axios.post("/allproducts", newCrop);
       console.log(response.data);
-      alert("Crop Added Successfully");
+    
+      Swal.fire({
+        icon: "success",
+        title: "Added!",
+        text: "Your product has been added successfully ✅",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+      
       form.reset();
+
     } catch (error) {
       console.error(error);
-      alert("Failed to add crop");
+
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+      
     }
   };
 
