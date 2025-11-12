@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
-import useAuth from "../useAuth";
+import AuthContext from "../AuthProvider/AuthContext";
 
 const NavBar = () => {
-  const { user, logout } = useAuth();
+  const { user, logout } = useContext(AuthContext);
+  console.log(user);
 
   const LogOut = () => {
     logout()
@@ -172,19 +173,22 @@ const NavBar = () => {
           </div>
 
           {/* Profile & Logout */}
+          
           <div className="hidden md:flex items-center gap-3">
             {user && (
               <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-green-500 shadow-sm">
                 <img
                   src={
-                    user.photoURL ||
-                    "https://www.google.com/imgres?q=avatar%20icon&imgurl=https%3A%2F%2Fwww.pngplay.com%2Fwp-content%2Fuploads%2F12%2FUser-Avatar-Profile-Transparent-Clip-Art-PNG.png&imgrefurl=https%3A%2F%2Fwww.pngplay.com%2Fimage%2F325522&docid=1PvXhz18oYCegM&tbnid=NKj8A8LQPGc3HM&vet=12ahUKEwiWsICVruiQAxVjyDgGHUN-LnQ4ChAzegQIXRAA..i&w=792&h=792&hcb=2&ved=2ahUKEwiWsICVruiQAxVjyDgGHUN-LnQ4ChAzegQIXRAA"
+                    user?.photoURL ||
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPipjgNTzWXUXcYZ42q41SCLYQKGgAeuVRBQ&s"
                   }
-                  alt="User Avatar"
+                  alt={user.displayName || "User Avatar"}
+                  referrerPolicy="no-referrer"
                   className="w-full h-full object-cover"
                 />
               </div>
             )}
+
             <div className="flex items-center gap-2 bg-amber-50 border border-amber-100 rounded-xl px-3 py-1 shadow-sm">
               {user ? (
                 <>

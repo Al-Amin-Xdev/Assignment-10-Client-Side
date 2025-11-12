@@ -1,9 +1,14 @@
 import React, { useContext } from "react";
 import AuthContext from "../AuthProvider/AuthContext";
+import { useLocation, useNavigate } from "react-router";
+
 
 const Login = () => {
 
   const { login, PopUpLogIn, setUser, setLoading } = useContext(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const HandleLogin = (event)=>{
     event.preventDefault();
@@ -15,6 +20,8 @@ const Login = () => {
     login(email, password)
     .then((userInfo) => {
       console.log(userInfo);
+      alert("Log in Successfull");
+      navigate(location?.state || '/');
       setUser(userInfo);
       setLoading(false);
     })
@@ -30,6 +37,8 @@ const Login = () => {
     PopUpLogIn()
     .then((userInfo) => {
       console.log(userInfo);
+      alert("Log in Successfull");
+      navigate(location?.state || '/');
       setUser(userInfo);
       setLoading(false);
     })
