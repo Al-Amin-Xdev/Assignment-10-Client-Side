@@ -12,7 +12,7 @@ const Home = () => {
 
   const NewProducts = useLoaderData();
   const firstSix = NewProducts.slice(0, 6);
-  console.log(firstSix);
+
 
   return (
     <div className="w-full mx-auto">

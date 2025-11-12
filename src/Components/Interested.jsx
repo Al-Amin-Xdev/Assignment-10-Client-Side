@@ -85,16 +85,13 @@ const Interested = ({ one }) => {
           </h1>
         </div>
 
+        {
+          userInterest.quantity? <h1 className="font-bold text-center bg-blue-500 text-white">Interest Status</h1> : ""
+        }
+
         <div>
           <div className="max-w-sm w-full mx-auto bg-white rounded-2xl shadow-md p-5 mb-6">
-            {/* User Info */}
-            <h3 className="text-lg font-semibold text-gray-800">
-              Md.Al-Amin Mia
-            </h3>
-            <p className="text-gray-600 text-sm mt-1">
-              Email: fn19021@mbstu.ac.bd
-            </p>
-
+            
             {/* Interest Details */}
             <div className="mt-4 bg-gray-50 rounded-xl p-4 flex flex-col gap-3">
               <div className="flex justify-between items-center">
@@ -114,7 +111,7 @@ const Interested = ({ one }) => {
                 </span>
               </div>
             </div>
-            
+
           </div>
         </div>
 

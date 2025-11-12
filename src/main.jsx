@@ -35,7 +35,8 @@ const router = createBrowserRouter([
       { path: '/addcrop', 
         element: <PrivateRoute><AddCrop /></PrivateRoute> },
 
-      { path: '/mypost', 
+      { path: '/mypost',
+        loader: ()=> fetch("http://localhost:5000/allproducts"), 
         element: <PrivateRoute><Myposts /></PrivateRoute> },
 
       { path: '/myinterest', 

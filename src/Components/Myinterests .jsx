@@ -22,29 +22,15 @@ const Myinterests = () => {
         );
         setMatchedCrops(matchedCrops);
         
-              
-      // Just the information of interested person
-        // let matched = [];
-
-        // arry.forEach(crop => {
-        //   if (crop.interest && crop.interest.length > 0) {
-        //       const filtered = crop.interest.filter(i => i.userEmail === user.email);
-        //       matched = matched.concat(filtered);
-        //     }
-        //   });
-
-        //   setInterest(matched); 
         })
         .catch(err => console.error(err));
 
-      }, []);
-
- console.log(matched);
+      }, [axios]);
 
 
 
   return (
-    <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
+    <div className="grid grid-cols-1 gap-2  mt-10 md:grid-cols-3">
       {
         matched.map(one=> <Interested key={one._id} one={one}></Interested>)
       }
