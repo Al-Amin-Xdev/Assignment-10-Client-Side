@@ -1,6 +1,5 @@
 import React from "react";
 import useAuth from "../useAuth";
-
 const Interested = ({ one }) => {
   const data = one;
 

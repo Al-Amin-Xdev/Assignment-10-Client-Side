@@ -4,12 +4,13 @@ import { useLoaderData } from "react-router";
 import useAuth from "../useAuth";
 
 
+
 const Myposts = () => {
 
   const {user} = useAuth();
 
   const data = useLoaderData();
-  console.log(data);
+  
  
   // Filter crops where interest array contains the user's email
 //   const matchedCrops = data.filter(crop => 
@@ -17,7 +18,7 @@ const Myposts = () => {
 // );
 const matchedCrops= data.filter(one=> one.ownerEmail === user.email)
 
-console.log(matchedCrops);
+
 
 
 

@@ -7,6 +7,8 @@ const AddCrop = () => {
   const { user } = useAuth();
   const axios = useAxios();
 
+  const token = user.accessToken;
+
   const handleAddCrop = async (event) => {
     event.preventDefault();
     const form = event.target;
@@ -28,7 +30,11 @@ const AddCrop = () => {
     };
 
     try {
-      const response = await axios.post("/allproducts", newCrop);
+      const response = await axios.post("/allproducts", newCrop, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
       console.log(response.data);
     
       Swal.fire({
@@ -38,7 +44,7 @@ const AddCrop = () => {
         timer: 2000,
         showConfirmButton: false,
       });
-      
+
       form.reset();
 
     } catch (error) {

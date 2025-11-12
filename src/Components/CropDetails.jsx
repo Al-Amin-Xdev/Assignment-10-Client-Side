@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { useLoaderData } from "react-router";
 import AuthContext from "../AuthProvider/AuthContext";
-import useAxios from "../useAxios";
 import Swal from "sweetalert2";
+import useAxios from "../useAxios";
 
 const CropDetails = () => {
   const data = useLoaderData();

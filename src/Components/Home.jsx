@@ -7,6 +7,7 @@ import BlogPost from "./BlogPost";
 import SuccessStories from "./SuccessStories";
 import TopFarmers from "./TopFarmers ";
 import { useLoaderData } from "react-router";
+import Loading from "./Loader";
 
 const Home = () => {
 

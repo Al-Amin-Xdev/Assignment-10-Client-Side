@@ -1,16 +1,40 @@
-# React + Vite
+Krishi-Link Web Application
+Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Krishi-Link is a modern web application for farmers and buyers to manage crops, track interests, and perform transactions. Users can register, login, add crops, express interest in crops, and manage their posts.
 
-Currently, two official plugins are available:
+Frontend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Technologies Used:
 
-## React Compiler
+React.js (with React Router v6)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Tailwind CSS (for styling and responsiveness)
 
-## Expanding the ESLint configuration
+Firebase Authentication (email/password & Google sign-in)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Axios (for API requests)
+
+React Toastify (for notifications)
+
+SweetAlert2 (for alerts)
+
+React Hooks: useState, useEffect, useContext
+
+Loader & PrivateRoute components for authentication handling
+
+Main Features:
+
+User registration & login
+
+Firebase authentication with access token verification
+
+Add, view, and manage crops
+
+Display posts with buyer interest
+
+Dynamic and responsive tables for crop interests
+
+Animated loading spinner while fetching data
+
+Notifications for actions (adding crop, errors, etc.)

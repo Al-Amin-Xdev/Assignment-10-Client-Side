@@ -152,8 +152,8 @@ const NavBar = () => {
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="shrink-0 flex items-center">
-            <NavLink to="/" className="text-xl font-bold text-green-600">
-              🌾 Krishi-Link
+            <NavLink to="/" className="text-xl font-bold text-green-600 p-2 rounded-md">
+            Krishi-Link
             </NavLink>
           </div>
 
