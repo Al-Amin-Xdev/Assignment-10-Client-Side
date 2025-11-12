@@ -1,16 +1,14 @@
-
 import { useContext } from "react";
-import { useLoaderData} from "react-router";
+import { useLoaderData } from "react-router";
 import AuthContext from "../AuthProvider/AuthContext";
+import useAxios from "../useAxios";
 
 const CropDetails = () => {
-
   const data = useLoaderData();
+  const axios = useAxios();
 
   const { user } = useContext(AuthContext);
 
-
-  console.log(data);
   const {
     _id,
     cropName,
@@ -26,6 +24,28 @@ const CropDetails = () => {
     ownerName,
     ownerEmail,
   } = data;
+
+
+  const handleSubmit = (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const data = {
+    userName: form.userName.value,
+    userEmail: form.userEmail.value,
+    quantity: form.quantity.value,
+    message: form.message.value,
+    status: form.status.value,
+  };
+
+  axios.patch(`/allproducts/${_id}`, data)
+  .then(result=>{
+    console.log(result);
+    alert("Interest Sent Successfully");
+  })
+  console.log(data);
+};
+
+
 
   return (
     <div className="mt-10">
@@ -70,7 +90,7 @@ const CropDetails = () => {
                 Category: <span className="font-semibold">{category}</span>
               </p>
               <p>
-                Email: <span className="font-semibold">{ownerEmail}</span>
+                Owner Email: <span className="font-semibold">{ownerEmail}</span>
               </p>
               <p>
                 Posted:{" "}
@@ -82,27 +102,87 @@ const CropDetails = () => {
           </div>
         </div>
 
-        {
-          user?.email !==  ownerEmail?
+        {user?.email !== ownerEmail ? (
           <div className="m-3">
-          <h1 className="font-bold text-xl text-center bg-green-400">Interested to this crop!!! <br></br>Contact The Owner</h1>
-          <form>
+            <h1 className="font-bold text-xl text-center bg-green-400">
+              Interested to this crop!!! <br></br>Contact The Owner
+            </h1>
 
-            <label className="label font-bold text-black">Name</label><br></br>
-            <input type="text" className="input" name="name" placeholder="Name" /><br></br>
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white shadow-lg rounded-xl p-6 space-y-4 mt-6 w-full">
+              {/* Name */}
+              <div>
+                <label className="block font-semibold text-gray-800 mb-1">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  name="userName"
+                  value={user?.displayName}
+                  placeholder="Enter your name"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-400 focus:outline-none"
+                />
+              </div>
 
-            <label className="label font-bold text-black">Quantity of the Crop</label><br></br>
-            <input type="number" className="input" name="number" placeholder="Quantity" /><br></br>
+              {/* Quantity */}
+              <div>
+                <label className="block font-semibold text-gray-800 mb-1">
+                  Quantity of the Crop (kg)
+                </label>
+                <input
+                  type="number"
+                  name="quantity"
+                  placeholder="Enter quantity"
+                  min="1"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-400 focus:outline-none"
+                />
+              </div>
 
-            <label className="label font-bold text-black">Email</label><br></br>
-            <input type="email" className="input" name="email" placeholder="Email" />
+              {/* Email */}
+              <div>
+                <label className="block font-semibold text-gray-800 mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="userEmail"
+                  value={user?.email}
+                  placeholder="Enter your email"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-400 focus:outline-none"
+                />
+              </div>
 
-            <button className="bg-green-700 text-white rounded-md w-2/3 mt-3">Submit Your Interest</button>
+              {/* Message */}
+              <div>
+                <label className="block font-semibold text-gray-800 mb-1">
+                  Message
+                </label>
+                <textarea
+                  name="message"
+                  placeholder="Write your message..."
+                  rows="3"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-400 focus:outline-none resize-none"
+                ></textarea>
+              </div>
 
-          </form>
-        </div> : ""
-        }
+              {/* Hidden Status */}
+              <input type="hidden" name="status" value="pending" />
 
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full bg-green-700 text-white py-2 rounded-md font-medium hover:bg-green-800 transition"
+              >
+                Submit Your Interest
+              </button>
+            </form>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

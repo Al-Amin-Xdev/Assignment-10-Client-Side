@@ -1,10 +1,15 @@
-import React from 'react';
+import React from "react";
+import useAuth from "../useAuth";
+import useAxios from "../useAxios";
 
-const Post = ({allpost}) => {
+const Post = ({ allpost }) => {
+  const { user } = useAuth();
+
+  const axios = useAxios();
 
   const data = allpost;
 
-    const {
+  const {
     _id,
     cropName,
     image,
@@ -18,9 +23,27 @@ const Post = ({allpost}) => {
     // ownerId,
     ownerName,
     ownerEmail,
+    interest,
   } = data;
 
+  const userInterest = interest.find((i) => i.userEmail !== user.email);
 
+
+  const handleAccept=()=>{
+
+    const UpdateStatus = {
+      email: interest.userEmail,
+      status: "accepted"
+    };
+    
+    axios.patch(`/allproducts/${_id}/interest`, UpdateStatus)
+    .then(data=>{
+      console.log(data.data);
+      alert("Interest accepted");
+    })
+    .catch(err => console.error(err));
+
+    };
 
 
   return (
@@ -74,6 +97,55 @@ const Post = ({allpost}) => {
                   {new Date(postedDate).toLocaleDateString()}
                 </span>
               </p>
+            </div>
+            <div></div>
+          </div>
+        </div>
+        <div>
+          <h1>Following Buyer Is Interested To your Product</h1>
+
+          <div className="mt-4 bg-gray-50 rounded-xl p-4 flex flex-col gap-3 shadow-sm">
+            <div className="flex justify-between items-center">
+              <span className="font-medium text-gray-700">Quantity:</span>
+              <span className="text-gray-900 font-semibold">
+                {userInterest.quantity}
+              </span>
+            </div>
+
+            <div className="flex justify-between items-center">
+              <span className="font-medium text-gray-700">Message:</span>
+              <span className="text-gray-900 font-semibold">
+                {userInterest.message}
+              </span>
+            </div>
+
+            <div className="flex justify-between items-center">
+              <span className="font-medium text-gray-700">Status:</span>
+              <span
+                className={`px-3 py-1 rounded-full text-white font-semibold text-sm ${
+                  userInterest.status === "pending"
+                    ? "bg-yellow-500"
+                    : userInterest.status === "accepted"
+                    ? "bg-green-500"
+                    : "bg-red-500"
+                }`}
+              >
+                {userInterest.status}
+              </span>
+            </div>
+
+            {/* Action Buttons */}
+
+            <div className="flex justify-end gap-3 mt-3">
+
+              <button onClick={handleAccept} className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-all">
+                Accept
+              </button>
+
+              <button className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-lg transition-all">
+                Reject
+              </button>
+
             </div>
           </div>
         </div>

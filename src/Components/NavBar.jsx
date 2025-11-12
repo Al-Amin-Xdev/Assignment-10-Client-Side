@@ -5,7 +5,6 @@ import AuthContext from "../AuthProvider/AuthContext";
 
 const NavBar = () => {
   const { user, logout } = useContext(AuthContext);
-  console.log(user);
 
   const LogOut = () => {
     logout()
@@ -173,7 +172,7 @@ const NavBar = () => {
           </div>
 
           {/* Profile & Logout */}
-          
+
           <div className="hidden md:flex items-center gap-3">
             {user && (
               <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-green-500 shadow-sm">

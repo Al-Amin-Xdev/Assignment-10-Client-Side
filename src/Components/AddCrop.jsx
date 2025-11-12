@@ -23,6 +23,7 @@ const AddCrop = () => {
       ownerName: user?.displayName || "",
       ownerEmail: user?.email,
       image: form.image.value,
+      interest: [],
     };
 
     try {

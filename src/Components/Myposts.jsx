@@ -5,10 +5,9 @@ import Post from "./Post";
 
 const Myposts = () => {
 
-  const [post, setPost]= useState([]);
-
+ 
+  const [matched, setMatchedCrops] = useState([]);
   const {user} = useAuth();
-
   const axios = useAxios();
 
 
@@ -16,7 +15,16 @@ const Myposts = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get("/allproducts");
-        setPost(response.data);
+        const arry = response.data;
+
+        // Get the data and the buyers info 
+         const matchedCrops = arry.filter(crop =>
+        Array.isArray(crop.interest) && crop.interest.some(i => i.userEmail !== user.email)
+        );
+        
+        setMatchedCrops(matchedCrops);
+
+
       } catch (error) {
         console.error(error);
       }
@@ -24,18 +32,14 @@ const Myposts = () => {
 
     fetchPosts();
   }, [axios]); 
- 
 
-  const posts = post.filter(one=> one.ownerEmail == user.email);
-  console.log(posts);
- 
-
+  console.log(matched);
 
   return (
     <div className="mt-5 grid grid-cols-1 gap-2 md:grid-cols-3">
 
      {
-      posts.map(allpost=> <Post key={allpost._id} allpost={allpost}></Post>)
+      matched.map(allpost=> <Post key={allpost._id} allpost={allpost}></Post>)
      }
       
     </div>
