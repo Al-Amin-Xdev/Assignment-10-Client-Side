@@ -2,11 +2,13 @@ import React, { useContext } from "react";
 import AuthContext from "../AuthProvider/AuthContext";
 import { useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../AuthProvider/firebase.init";
 
 
 const Login = () => {
 
-  const { login, PopUpLogIn, setUser, setLoading } = useContext(AuthContext);
+  const { login, PopUpLogIn, setUser, setLoading, user } = useContext(AuthContext);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,7 +23,8 @@ const Login = () => {
     login(email, password)
     .then((userInfo) => {
       console.log(userInfo);
-
+      setUser(userInfo);
+      setLoading(false);
        Swal.fire({
         icon: "success",
         title: "Log-In",
@@ -31,8 +34,7 @@ const Login = () => {
       });
 
       navigate(location?.state || '/');
-      setUser(userInfo);
-      setLoading(false);
+      
     })
     .catch((error) => {
       const errorMessage = error.message;
@@ -40,7 +42,7 @@ const Login = () => {
        Swal.fire({
         icon: "info",
         title: "Log-In",
-        text: "Your Log-in is not successfull ✅",
+        text: "Your Log-in is not successfull",
         timer: 2000,
         showConfirmButton: false,
       });
@@ -50,35 +52,65 @@ const Login = () => {
 
   const HandlePopUpLogin = ()=>{
   
+    console.log("Log in with google");
     PopUpLogIn()
     .then((userInfo) => {
-      
+      setUser(userInfo);
       Swal.fire({
         icon: "success",
         title: "Log-In",
-        text: "Your log-in is successfull ✅",
+        text: "Your log-in successfull ✅",
         timer: 2000,
         showConfirmButton: false,
       });
-      
       navigate(location?.state || '/');
-      setUser(userInfo);
-      setLoading(false);
+      
     })
     .catch((error) => {
       const errorMessage = error.message;
-       Swal.fire({
+
+      Swal.fire({
+        icon: "info",
+        title: "Log-In",
+        text: "Your log-in is not successfull ",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+      console.log(errorMessage);
+    });
+
+  }
+
+
+  const HandleReset =()=>{
+    sendPasswordResetEmail(auth, user.email)
+    .then((result) => {
+
+      console.log(result);
+
+      Swal.fire({
         icon: "Info",
         title: "Log-In",
         text: "Your log-in was not successfull",
         timer: 2000,
         showConfirmButton: false,
       });
-      
-      console.log(errorMessage);
-    });
 
-  }
+    })
+    .catch((error) => {
+
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      Swal.fire({
+        icon: "Info",
+        title: "Log-In",
+        text: "Your log-in was not successfull",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
+    });
+    };
 
 
   return (
@@ -107,19 +139,21 @@ const Login = () => {
                   <div>
                     <a className="link link-hover">Forgot password?</a>
                   </div>
-                  <button className="btn btn-neutral mt-4">Login</button>
-                  <button onClick={HandlePopUpLogin} className="btn btn-neutral mt-4">
-                    Sign In with GOOGLE
-                  </button>
+                  <button type="submit" className="btn btn-neutral mt-4">Login</button>
+                 
                 </fieldset>
               </form>
+               <button type="button" onClick={HandlePopUpLogin} className="btn btn-neutral mt-4">
+                    Sign In with GOOGLE
+                  </button>
             </div>
           </div>
         </div>
       </div>
+      
     </div>
   );
 };
 
 export default Login;
-<h1>This is login page</h1>;
+

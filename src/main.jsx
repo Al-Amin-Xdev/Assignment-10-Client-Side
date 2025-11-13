@@ -25,18 +25,18 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage></ErrorPage> ,
     children: [
       { index: true,
-        loader: ()=> fetch("http://localhost:5000/allproducts"),
+        loader: ()=> fetch("https://krishi-link-server-five.vercel.app/allproducts"),
       Component: Home },
 
       { path: '/allcrops',
-        loader: ()=> fetch("http://localhost:5000/allproducts"), 
+        loader: ()=> fetch("https://krishi-link-server-five.vercel.app/allproducts"), 
         Component: AllCrops },
 
       { path: '/addcrop', 
         element: <PrivateRoute><AddCrop /></PrivateRoute> },
 
       { path: '/mypost',
-        loader: ()=> fetch("http://localhost:5000/allproducts"), 
+        loader: ()=> fetch("https://krishi-link-server-five.vercel.app/allproducts"), 
         element: <PrivateRoute><Myposts /></PrivateRoute> },
 
       { path: '/myinterest', 
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       { path:'/profile' , element: <PrivateRoute><Profile></Profile></PrivateRoute> },
 
       { path:'/cropdetails/:id',
-        loader: ({params})=> fetch(`http://localhost:5000/allproducts/${params.id}`), 
+        loader: ({params})=> fetch(`https://krishi-link-server-five.vercel.app/allproducts/${params.id}`), 
         element: <PrivateRoute><CropDetails></CropDetails></PrivateRoute>},
     ],
   },

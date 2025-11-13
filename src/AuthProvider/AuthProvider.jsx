@@ -32,6 +32,7 @@ const AuthProvider = ({children}) => {
   };
 
 
+
   
   useEffect(()=>{
 
@@ -46,6 +47,7 @@ const AuthProvider = ({children}) => {
           } else {
             console.log("User is not Logged In");
             setUser(null);
+            setLoading(false);
           }
 
           return ()=>{
@@ -58,7 +60,7 @@ const AuthProvider = ({children}) => {
 
 
   const authInfo = {
-    user, loading, register, login, PopUpLogIn, setUser, logout
+    user, loading, register, login, PopUpLogIn, setUser, logout,
   };
 
 
