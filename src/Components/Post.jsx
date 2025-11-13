@@ -33,7 +33,7 @@ const Post = ({ one }) => {
     axios
       .patch(`/allproducts/${_id}/interest`, updateData)
       .then((res) => {
-        console.log(res.data);
+        
 
          Swal.fire({
         icon: "success",
@@ -56,7 +56,7 @@ const Post = ({ one }) => {
     axios
       .patch(`/allproducts/${_id}/interest`, updateData)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
 
           Swal.fire({
         icon: "Info",

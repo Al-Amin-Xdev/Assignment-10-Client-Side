@@ -20,7 +20,7 @@ const Register = () => {
 
     register(email, password)
     .then((userInfo) => {
-      console.log(userInfo);
+      // console.log(userInfo);
       Swal.fire({
         icon: "success",
         title: "Registration",

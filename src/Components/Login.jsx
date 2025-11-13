@@ -1,14 +1,11 @@
 import React, { useContext } from "react";
 import AuthContext from "../AuthProvider/AuthContext";
-import { useLocation, useNavigate } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../AuthProvider/firebase.init";
-
 
 const Login = () => {
 
-  const { login, PopUpLogIn, setUser, setLoading, user } = useContext(AuthContext);
+  const { login, PopUpLogIn, setUser, setLoading } = useContext(AuthContext);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -18,7 +15,7 @@ const Login = () => {
 
     const email = event.target.email.value;
     const password = event.target.password.value;
-    console.log(email, password);
+    
 
     login(email, password)
     .then((userInfo) => {
@@ -52,7 +49,7 @@ const Login = () => {
 
   const HandlePopUpLogin = ()=>{
   
-    console.log("Log in with google");
+    
     PopUpLogIn()
     .then((userInfo) => {
       setUser(userInfo);
@@ -81,36 +78,6 @@ const Login = () => {
 
   }
 
-
-  const HandleReset =()=>{
-    sendPasswordResetEmail(auth, user.email)
-    .then((result) => {
-
-      console.log(result);
-
-      Swal.fire({
-        icon: "Info",
-        title: "Log-In",
-        text: "Your log-in was not successfull",
-        timer: 2000,
-        showConfirmButton: false,
-      });
-
-    })
-    .catch((error) => {
-
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      Swal.fire({
-        icon: "Info",
-        title: "Log-In",
-        text: "Your log-in was not successfull",
-        timer: 2000,
-        showConfirmButton: false,
-      });
-
-    });
-    };
 
 
   return (
@@ -143,9 +110,13 @@ const Login = () => {
                  
                 </fieldset>
               </form>
-               <button type="button" onClick={HandlePopUpLogin} className="btn btn-neutral mt-4">
+                  <button type="button" onClick={HandlePopUpLogin} className="btn btn-neutral mt-4">
                     Sign In with GOOGLE
                   </button>
+                  
+                  <NavLink to="/resetPass"><button type="button" className="btn btn-neutral mt-4 w-full mx-auto">
+                  Forgot Password !!? Reset Now
+                  </button></NavLink>
             </div>
           </div>
         </div>

@@ -17,6 +17,7 @@ import Profile from './Components/Profile.jsx';
 import AddCrop from './Components/AddCrop.jsx';
 import Myposts from './Components/Myposts.jsx';
 import Myinterests from './Components/Myinterests .jsx';
+import ResetPass from './Components/ResetPass.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,8 @@ const router = createBrowserRouter([
       { path: '/allcrops',
         loader: ()=> fetch("https://krishi-link-server-five.vercel.app/allproducts"), 
         Component: AllCrops },
+
+      {path: '/resetPass' , Component: ResetPass},
 
       { path: '/addcrop', 
         element: <PrivateRoute><AddCrop /></PrivateRoute> },

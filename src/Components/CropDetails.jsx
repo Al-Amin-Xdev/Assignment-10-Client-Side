@@ -40,7 +40,7 @@ const CropDetails = () => {
 
   axios.patch(`/allproducts/${_id}`, data)
   .then(result=>{
-    console.log(result);
+    // console.log(result);
 
     Swal.fire({
       icon: "success",
